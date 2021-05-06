@@ -1,0 +1,129 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>a02007037</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 1000px;
+            background-color: #d6d6d6;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#1994a4", "id": "Abierto", "label": "Abierto", "shape": "dot", "size": 10, "title": "", "value": 1.0}, {"color": "#960f69", "id": "Alcaldia Del Ayuntamiento De Yeste", "label": "Alcaldia Del Ayuntamiento De Yeste", "shape": "dot", "size": 10, "title": "Abierto    1\nMenores    0\n", "value": 1.0}, {"color": "#960f69", "id": "Alcaldia Del Ayuntamiento De Albacete", "label": "Alcaldia Del Ayuntamiento De Albacete", "shape": "dot", "size": 10, "title": "Menores    1\nAbierto    0\n", "value": 1.0}, {"color": "#ff6734", "id": "Castillala Mancha", "label": "Castillala Mancha", "shape": "dot", "size": 10, "title": "Menores    47\nAbierto     1\n,Subvenciones: 24", "value": 72.0}, {"color": "#960f69", "id": "Ayuntamiento De Albacete", "label": "Ayuntamiento De Albacete", "shape": "dot", "size": 10, "title": "Subvenciones: 1", "value": 1.0}, {"color": "#960f69", "id": "Direccion General De Programas De Empleo De La Junta De Comunidades De Castillala Mancha", "label": "Direccion General De Programas De Empleo De La Junta De Comunidades De Castillala Mancha", "shape": "dot", "size": 10, "title": "Subvenciones: 2", "value": 2.0}, {"color": "#960f69", "id": "Direccion General Trabajo Formacion Y Seguridad Laboral De La Junta De Comunidades De Castillala Mancha", "label": "Direccion General Trabajo Formacion Y Seguridad Laboral De La Junta De Comunidades De Castillala Mancha", "shape": "dot", "size": 10, "title": "Subvenciones: 21", "value": 21.0}, {"color": "#960f69", "id": "Direccion Provincial De La Consejeria De Fomento En Albacete", "label": "Direccion Provincial De La Consejeria De Fomento En Albacete", "shape": "dot", "size": 10, "title": "Menores    1\nAbierto    0\n", "value": 1.0}, {"color": "#1994a4", "id": "Menores", "label": "Menores", "shape": "dot", "size": 10, "title": "", "value": 48.0}, {"color": "#960f69", "id": "Presidencia De Diputacion Provincial De Albacete", "label": "Presidencia De Diputacion Provincial De Albacete", "shape": "dot", "size": 10, "title": "Menores    45\nAbierto     0\n", "value": 45.0}, {"color": "#960f69", "id": "Presidencia De La Confederacion Hidrografica Del Jucar", "label": "Presidencia De La Confederacion Hidrografica Del Jucar", "shape": "dot", "size": 10, "title": "Menores    1\nAbierto    0\n", "value": 1.0}, {"color": "#ff6734", "id": "Comunidad Valenciana", "label": "Comunidad Valenciana", "shape": "dot", "size": 10, "title": "Menores    1\nAbierto    0\n", "value": 1.0}, {"color": "#1994a4", "id": "Subvenci\u00f3n", "label": "Subvenci\u00f3n", "shape": "dot", "size": 10, "title": "", "value": 24.0}, {"color": "#9aae04", "id": "auto martinez sa", "label": "auto martinez sa", "shape": "dot", "size": 10, "title": "a02007037 Menores    23\nAbierto     0\n,Subvenciones: 8", "value": 31.0}, {"color": "#969696", "id": "martinez moraga sl", "label": "martinez moraga sl", "shape": "dot", "size": 10, "title": "", "value": 73.0}, {"color": "#9aae04", "id": "provehima sa", "label": "provehima sa", "shape": "dot", "size": 10, "title": "a02011203 Menores    25\nAbierto     1\n,Subvenciones: 16", "value": 42.0}]);
+        edges = new vis.DataSet([{"from": "Abierto", "to": "Alcaldia Del Ayuntamiento De Yeste", "value": 1.0, "weight": 1}, {"from": "Alcaldia Del Ayuntamiento De Albacete", "to": "Castillala Mancha", "value": 1.0, "weight": 1}, {"from": "Alcaldia Del Ayuntamiento De Yeste", "to": "Castillala Mancha", "value": 1.0, "weight": 1}, {"from": "Ayuntamiento De Albacete", "to": "Castillala Mancha", "value": 1.0, "weight": 1}, {"from": "Direccion General De Programas De Empleo De La Junta De Comunidades De Castillala Mancha", "to": "Castillala Mancha", "value": 2.0, "weight": 1}, {"from": "Direccion General Trabajo Formacion Y Seguridad Laboral De La Junta De Comunidades De Castillala Mancha", "to": "Castillala Mancha", "value": 21.0, "weight": 1}, {"from": "Direccion Provincial De La Consejeria De Fomento En Albacete", "to": "Castillala Mancha", "value": 1.0, "weight": 1}, {"from": "Menores", "to": "Alcaldia Del Ayuntamiento De Albacete", "value": 1.0, "weight": 1}, {"from": "Menores", "to": "Direccion Provincial De La Consejeria De Fomento En Albacete", "value": 1.0, "weight": 1}, {"from": "Menores", "to": "Presidencia De Diputacion Provincial De Albacete", "value": 45.0, "weight": 1}, {"from": "Menores", "to": "Presidencia De La Confederacion Hidrografica Del Jucar", "value": 1.0, "weight": 1}, {"from": "Presidencia De Diputacion Provincial De Albacete", "to": "Castillala Mancha", "value": 45.0, "weight": 1}, {"from": "Presidencia De La Confederacion Hidrografica Del Jucar", "to": "Comunidad Valenciana", "value": 1.0, "weight": 1}, {"from": "Subvenci\u00f3n", "to": "Direccion General Trabajo Formacion Y Seguridad Laboral De La Junta De Comunidades De Castillala Mancha", "value": 8.0, "weight": 1}, {"from": "Subvenci\u00f3n", "to": "Ayuntamiento De Albacete", "value": 1.0, "weight": 1}, {"from": "Subvenci\u00f3n", "to": "Direccion General De Programas De Empleo De La Junta De Comunidades De Castillala Mancha", "value": 2.0, "weight": 1}, {"from": "auto martinez sa", "to": "Menores", "value": 23.0, "weight": 1}, {"from": "auto martinez sa", "to": "Subvenci\u00f3n", "value": 8.0, "weight": 1}, {"from": "auto martinez sa", "to": "martinez moraga sl", "value": 31.0, "weight": 1}, {"from": "provehima sa", "to": "Abierto", "value": 1.0, "weight": 1}, {"from": "provehima sa", "to": "Menores", "value": 25.0, "weight": 1}, {"from": "provehima sa", "to": "Subvenci\u00f3n", "value": 16.0, "weight": 1}, {"from": "provehima sa", "to": "martinez moraga sl", "value": 42.0, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.02,
+            "damping": 0.8,
+            "gravitationalConstant": -190,
+            "springConstant": 0.005,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
